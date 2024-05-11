@@ -1,0 +1,30 @@
+<!-- product_list.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Product List</title>
+</head>
+
+<body>
+    <h2>Product List</h2>
+    <ul>
+        {% for product in products %}
+        <li>
+            {{ product.name }} - {{ product.price }}
+            <form method="post" action="{% url 'delete_product' product.id %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+            <button>
+                <a href="{% url 'update_product' product.id %}">Update</a>
+            </button>
+
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'add_product' %}">Add Product</a>
+</body>
+
+</html>
